@@ -6,11 +6,14 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 90%;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 h1 {
@@ -57,15 +60,17 @@ h1 {
 
 #task-list {
     margin-top: 20px;
+    max-width: 44%;
 }
 
 .task {
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
     background-color: #f9f9f9;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: 100%;
 }
 
 .task.fade-out {
@@ -75,10 +80,12 @@ h1 {
 
 .task h3 {
     margin: 0;
+    font-size: 1.2em;
 }
 
 .task p {
     margin: 5px 0;
+    color: #555;
 }
 
 .task .actions {
@@ -92,6 +99,7 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9em;
 }
 
 .task .actions button.edit {
@@ -104,9 +112,43 @@ h1 {
     color: #fff;
 }
 
-#loading {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 18px;
-    color: #555;
+.task .actions button.complete {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Стили для режима редактирования */
+.task.editing {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.task.editing input,
+.task.editing textarea,
+.task.editing select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.task.editing textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.task.editing .actions {
+    margin-top: 15px;
+}
+
+.task.editing .save {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.task.editing .cancel {
+    background-color: #6c757d;
+    color: #fff;
 }

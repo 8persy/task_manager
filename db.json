@@ -1,17 +1,9 @@
 {
   "tasks": [
     {
-      "id": "ceba",
-      "title": "geng",
-      "description": "111",
-      "priority": "high",
-      "dueDate": "2222-10-10",
-      "status": "В процессе"
-    },
-    {
       "id": "976e",
-      "title": "1",
-      "description": "1",
+      "title": "12312",
+      "description": "1длу дууду",
       "priority": "low",
       "dueDate": "2019-10-10",
       "status": "В процессе"
@@ -19,10 +11,28 @@
     {
       "id": "4c4c",
       "title": "emkcekmv",
-      "description": "kv r fbk",
+      "description": "kv r fbkыыыыыыыыыыыыыы",
       "priority": "low",
       "dueDate": "2025-10-10",
       "status": "Завершено"
+    },
+    {
+      "id": "14fb",
+      "title": "задача ",
+      "description": "привет это новая задача ",
+      "priority": "high",
+      "dueDate": "2025-10-10",
+      "status": "В процессе",
+      "isEditing": false
+    },
+    {
+      "id": "13de",
+      "title": "1111111111111111111111",
+      "description": "",
+      "priority": "low",
+      "dueDate": "2025-10-10",
+      "status": "В процессе",
+      "isEditing": false
     }
   ]
 }

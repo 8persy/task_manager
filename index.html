@@ -7,39 +7,55 @@
     <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="form">
         <h1>Task Manager</h1>
         <form id="task-form">
+            <label for="task-title">Заголовок</label>
             <input type="text" id="task-title" placeholder="Название задачи" required>
+
+            <label for="task-description">Содержание</label>
             <textarea id="task-description" placeholder="Описание задачи"></textarea>
+
+            <label for="task-priority">Приоритет</label>
             <select id="task-priority">
                 <option value="low">Низкий</option>
                 <option value="medium">Средний</option>
                 <option value="high">Высокий</option>
             </select>
+
+            <label for="task-due-date">Дедлайн</label>
             <input type="date" id="task-due-date" required>
+
             <button type="submit">Добавить задачу</button>
         </form>
 
         <div class="filters">
+            <label for="filter-status">Статус</label>
             <select id="filter-status">
                 <option value="all">Все</option>
                 <option value="В процессе">В процессе</option>
                 <option value="Завершено">Завершено</option>
             </select>
+
+            <label for="filter-priority">Приоритет</label>
             <select id="filter-priority">
                 <option value="all">Все</option>
                 <option value="low">Низкий</option>
                 <option value="medium">Средний</option>
                 <option value="high">Высокий</option>
             </select>
+
+            <label for="filter-due-date">Дата</label>
             <input type="date" id="filter-due-date">
+
             <button onclick="applyFilters()">Применить фильтры</button>
         </div>
-
-        <div id="loading">Загрузка...</div>
-        <div id="task-list"></div>
     </div>
-    <script src="app.js"></script>
+
+    <div id="loading">Загрузка...</div>
+    <div id="task-list"></div>
+</div>
+<script src="app.js"></script>
 </body>
 </html>
