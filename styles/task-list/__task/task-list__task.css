@@ -1,0 +1,9 @@
+.task-list__task {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: 100%;
+}

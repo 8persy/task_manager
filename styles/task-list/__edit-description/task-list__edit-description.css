@@ -1,0 +1,11 @@
+.task-list__edit-description {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+
+    resize: vertical;
+    min-height: 100px;
+}

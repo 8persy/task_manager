@@ -1,3 +1,39 @@
+@import "form/form.css";
+@import "form/__title/form__title.css";
+@import "form/__task-title/form__task-title.css";
+@import "form/__task-priority/form__task-priority.css";
+@import "form/__task-form/form__task-form.css";
+@import 'form/__task-description/form__task-description.css';
+@import "form/__task-date/form__task-date.css";
+@import "form/__task-add/form__task-add.css";
+@import "form/__filter/form__filter.css";
+@import "form/__filter-status/form__filter-status.css";
+@import "form/__filter-preority/form__filter-preority.css";
+@import "form/__filter-date/form__filter-date.css";
+@import "form/__filter-apply/form__filter-apply.css";
+
+@import "loading/loading.css";
+
+@import "task-list/task-list.css";
+@import "task-list/__task/task-list__task.css";
+@import "task-list/__task-status/task-list__task-status.css";
+@import "task-list/__task-actions/task-list__task-actions.css";
+@import "task-list/__task-actions/task-list__task-actions_complete.css";
+@import "task-list/__task-actions/task-list__task-actions_delete.css";
+@import "task-list/__task-actions/task-list__task-actions_edit.css";
+@import "task-list/__edit-title/task-list__edit-title.css";
+@import "task-list/__edit-priority/task-list__edit-priority.css";
+@import "task-list/__edit-description/task-list__edit-description.css";
+@import "task-list/__edit-date/task-list__edit-date.css";
+@import "task-list/__edit-actions/task-list__edit-actions.css";
+@import "task-list/__edit-actions/task-list__edit-actions_cancel.css";
+@import "task-list/__edit-actions/task-list__edit-actions_save.css";
+@import "task-list/__task-title/task-list__task-title.css";
+@import "task-list/__task-priority/task-list__task-priority.css";
+@import "task-list/__task-description/task-list__task-description.css";
+@import "task-list/__task-date/task-list__task-date.css";
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -16,139 +52,13 @@ body {
     flex-wrap: wrap;
 }
 
-h1 {
-    text-align: center;
-}
-
-#task-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#task-form input, #task-form textarea, #task-form select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#task-form button {
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#task-form button:hover {
-    background-color: #218838;
-}
-
-.filters {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.filters select, .filters input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#task-list {
-    margin-top: 20px;
-    max-width: 44%;
-}
-
-.task {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    max-width: 100%;
-}
-
 .task.fade-out {
     opacity: 0;
     transform: translateX(-100%);
 }
 
-.task h3 {
-    margin: 0;
-    font-size: 1.2em;
-}
-
-.task p {
-    margin: 5px 0;
-    color: #555;
-}
-
-.task .actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.task .actions button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.task .actions button.edit {
-    background-color: #ffc107;
-    color: #000;
-}
-
-.task .actions button.delete {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.task .actions button.complete {
-    background-color: #28a745;
-    color: #fff;
-}
-
 /* Стили для режима редактирования */
 .task.editing {
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-}
-
-.task.editing input,
-.task.editing textarea,
-.task.editing select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-}
-
-.task.editing textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.task.editing .actions {
-    margin-top: 15px;
-}
-
-.task.editing .save {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.task.editing .cancel {
-    background-color: #6c757d;
-    color: #fff;
+    /*background-color: #fff3cd;*/
+    /*border-color: #ffeeba;*/
 }

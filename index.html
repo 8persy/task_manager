@@ -9,37 +9,37 @@
 <body>
 <div class="container">
     <div class="form">
-        <h1>Task Manager</h1>
-        <form id="task-form">
+        <h1 class="form__title">Task Manager</h1>
+        <form class="form__task-form">
             <label for="task-title">Заголовок</label>
-            <input type="text" id="task-title" placeholder="Название задачи" required>
+            <input class="form__task-title" type="text" id="task-title" placeholder="Название задачи" required>
 
             <label for="task-description">Содержание</label>
-            <textarea id="task-description" placeholder="Описание задачи"></textarea>
+            <textarea class="form__task-description" id="task-description" placeholder="Описание задачи"></textarea>
 
             <label for="task-priority">Приоритет</label>
-            <select id="task-priority">
+            <select class="form__task-priority" id="task-priority">
                 <option value="low">Низкий</option>
                 <option value="medium">Средний</option>
                 <option value="high">Высокий</option>
             </select>
 
             <label for="task-due-date">Дедлайн</label>
-            <input type="date" id="task-due-date" required>
+            <input class="form__task-date" type="date" id="task-due-date" required>
 
-            <button type="submit">Добавить задачу</button>
+            <button class="form__task-add" type="submit">Добавить задачу</button>
         </form>
 
-        <div class="filters">
+        <div class="form__filter">
             <label for="filter-status">Статус</label>
-            <select id="filter-status">
+            <select class="form__filter-status" id="filter-status">
                 <option value="all">Все</option>
                 <option value="В процессе">В процессе</option>
                 <option value="Завершено">Завершено</option>
             </select>
 
             <label for="filter-priority">Приоритет</label>
-            <select id="filter-priority">
+            <select class="form__filter-priority" id="filter-priority">
                 <option value="all">Все</option>
                 <option value="low">Низкий</option>
                 <option value="medium">Средний</option>
@@ -47,14 +47,14 @@
             </select>
 
             <label for="filter-due-date">Дата</label>
-            <input type="date" id="filter-due-date">
+            <input class="form__filter-date" type="date" id="filter-due-date">
 
-            <button onclick="applyFilters()">Применить фильтры</button>
+            <button class="form__filter-apply" onclick="applyFilters()">Применить фильтры</button>
         </div>
     </div>
 
-    <div id="loading">Загрузка...</div>
-    <div id="task-list"></div>
+    <div class="loading">Загрузка...</div>
+    <div class="task-list"></div>
 </div>
 <script src="app.js"></script>
 </body>

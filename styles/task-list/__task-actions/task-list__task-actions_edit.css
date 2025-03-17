@@ -1,0 +1,10 @@
+.task-list__task-actions_edit {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+
+    background-color: #ffc107;
+    color: #000;
+}

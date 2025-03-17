@@ -1,0 +1,12 @@
+.form__task-add {
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form__task-add:hover {
+    background-color: #218838;
+}

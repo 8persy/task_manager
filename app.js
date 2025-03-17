@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const taskForm = document.getElementById('task-form');
-    const taskList = document.getElementById('task-list');
+    const taskForm = document.querySelector('.form__task-form');
+    const taskList = document.querySelector('.task-list');
     const apiUrl = 'http://localhost:3001/tasks';
 
     let tasks = [];
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Ошибка:', error);
             alert('Не удалось загрузить задачи. Проверьте подключение к серверу.');
         } finally {
-            document.getElementById('loading').style.display = 'none';
+            document.querySelector('.loading').style.display = 'none';
         }
     }
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.innerHTML = '';
         tasks.forEach(task => {
             const taskElement = document.createElement('div');
-            taskElement.classList.add('task');
+            taskElement.classList.add('task-list__task');
             if (task.isEditing) {
                 taskElement.classList.add('editing'); // Добавляем класс для режима редактирования
             }
@@ -48,46 +48,46 @@ document.addEventListener('DOMContentLoaded', () => {
             if (task.isEditing) {
                 // Режим редактирования
                 taskElement.innerHTML = `
-                <input type="text" class="edit-title" value="${task.title}" placeholder="Название задачи">
-                <textarea class="edit-description" placeholder="Описание задачи">${task.description}</textarea>
-                <select class="edit-priority">
+                <input type="text" class="task-list__edit-title" value="${task.title}" placeholder="Название задачи">
+                <textarea class="task-list__edit-description" placeholder="Описание задачи">${task.description}</textarea>
+                <select class="task-list__edit-priority">
                     <option value="low" ${task.priority === 'low' ? 'selected' : ''}>Низкий</option>
                     <option value="medium" ${task.priority === 'medium' ? 'selected' : ''}>Средний</option>
                     <option value="high" ${task.priority === 'high' ? 'selected' : ''}>Высокий</option>
                 </select>
-                <input type="date" class="edit-due-date" value="${task.dueDate}">
-                <div class="actions">
-                    <button class="save">Сохранить</button>
-                    <button class="cancel">Отмена</button>
+                <input class="task-list__edit-date" type="date" value="${task.dueDate}">
+                <div class="task-list__edit-actions">
+                    <button class="task-list__edit-actions_save">Сохранить</button>
+                    <button class="task-list__edit-actions_cancel">Отмена</button>
                 </div>
             `;
             } else {
                 // Режим просмотра
                 taskElement.innerHTML = `
-                <h3>${task.title}</h3>
-                <p>${task.description}</p>
-                <p>Приоритет: ${task.priority}</p>
-                <p>Срок выполнения: ${task.dueDate}</p>
-                <p>Статус: ${task.status}</p>
-                <div class="actions">
-                    <button class="edit">Редактировать</button>
-                    <button class="delete">Удалить</button>
-                    <button class="complete">${task.status === 'Завершено' ? 'Возобновить' : 'Завершить'}</button>
+                <h3 class="task-list__task-title">${task.title}</h3>
+                <p class="task-list__task-description">${task.description}</p>
+                <p class="task-list__task-priority">Приоритет: ${task.priority}</p>
+                <p class="task-list__task-date">Срок выполнения: ${task.dueDate}</p>
+                <p class="task-list__task-status">Статус: ${task.status}</p>
+                <div class="task-list__task-actions">
+                    <button class="task-list__task-actions_edit">Редактировать</button>
+                    <button class="task-list__task-actions_delete">Удалить</button>
+                    <button class="task-list__task-actions_complete">${task.status === 'Завершено' ? 'Возобновить' : 'Завершить'}</button>
                 </div>
             `;
             }
 
             // Добавляем обработчики событий
             if (task.isEditing) {
-                const saveButton = taskElement.querySelector('.save');
-                const cancelButton = taskElement.querySelector('.cancel');
+                const saveButton = taskElement.querySelector('.task-list__edit-actions_save');
+                const cancelButton = taskElement.querySelector('.task-list__edit-actions_cancel');
 
                 saveButton.addEventListener('click', () => saveTask(task.id));
                 cancelButton.addEventListener('click', () => cancelEdit(task.id));
             } else {
-                const editButton = taskElement.querySelector('.edit');
-                const deleteButton = taskElement.querySelector('.delete');
-                const completeButton = taskElement.querySelector('.complete');
+                const editButton = taskElement.querySelector('.task-list__task-actions_edit');
+                const deleteButton = taskElement.querySelector('.task-list__task-actions_delete');
+                const completeButton = taskElement.querySelector('.task-list__task-actions_complete');
 
                 editButton.addEventListener('click', () => startEdit(task.id));
                 deleteButton.addEventListener('click', () => deleteTask(task.id));
@@ -109,11 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для сохранения изменений
     async function saveTask(taskId) {
-        const taskElement = document.querySelector(`.task[data-id="${taskId}"]`);
-        const title = taskElement.querySelector('.edit-title').value;
-        const description = taskElement.querySelector('.edit-description').value;
-        const priority = taskElement.querySelector('.edit-priority').value;
-        const dueDate = taskElement.querySelector('.edit-due-date').value;
+        const taskElement = document.querySelector(`.task-list__task[data-id="${taskId}"]`);
+        const title = taskElement.querySelector('.task-list__edit-title').value;
+        const description = taskElement.querySelector('.task-list__edit-description').value;
+        const priority = taskElement.querySelector('.task-list__edit-priority').value;
+        const dueDate = taskElement.querySelector('.task-list__edit-date').value;
 
         const updatedTask = {
             title,
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ...task,
                 isEditing: false
             }));
-            fetchTasks(); // Перезагружаем задачи
+            await fetchTasks(); // Перезагружаем задачи
         } catch (error) {
             console.error('Ошибка:', error);
             alert('Не удалось сохранить задачу. Проверьте подключение к серверу.');
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'DELETE'
             });
             if (!response.ok) throw new Error('Ошибка при удалении задачи');
-            fetchTasks(); // Перезагружаем задачи
+            await fetchTasks(); // Перезагружаем задачи
         } catch (error) {
             console.error('Ошибка:', error);
             alert('Не удалось удалить задачу. Проверьте подключение к серверу.');
@@ -194,13 +194,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    window.applyFilters = () => {
+        const statusFilter = document.querySelector('.form__filter-status').value;
+        const priorityFilter = document.querySelector('.form__filter-priority').value;
+        const dueDateFilter = document.querySelector('.form__filter-date').value;
+
+        let filteredTasks = tasks;
+
+        if (statusFilter !== 'all') {
+            filteredTasks = filteredTasks.filter(task => task.status === statusFilter);
+        }
+
+        if (priorityFilter !== 'all') {
+            filteredTasks = filteredTasks.filter(task => task.priority === priorityFilter);
+        }
+
+        if (dueDateFilter) {
+            filteredTasks = filteredTasks.filter(task => task.dueDate === dueDateFilter);
+        }
+
+        renderTasks(filteredTasks);
+    };
+
     // Функция для добавления задачи
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const title = document.getElementById('task-title').value;
-        const description = document.getElementById('task-description').value;
-        const priority = document.getElementById('task-priority').value;
-        const dueDate = document.getElementById('task-due-date').value;
+        const title = document.querySelector('.form__task-title').value;
+        const description = document.querySelector('.form__task-description').value;
+        const priority = document.querySelector('.form__task-priority').value;
+        const dueDate = document.querySelector('.form__task-date').value;
+        console.log(`t: ${title}, d: ${dueDate}`)
 
         if (title && dueDate) {
             const newTask = {
@@ -221,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(newTask)
                 });
                 if (!response.ok) throw new Error('Ошибка при добавлении задачи');
-                fetchTasks(); // Перезагружаем задачи
+                await fetchTasks(); // Перезагружаем задачи
                 taskForm.reset();
             } catch (error) {
                 console.error('Ошибка:', error);
