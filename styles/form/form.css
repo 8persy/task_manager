@@ -1,0 +1,10 @@
+.form {
+    width: 48%;
+    margin: 0 auto;
+}
+
+@media screen and (max-device-width: 780px) {
+    .form {
+        width: 100%;
+    }
+}

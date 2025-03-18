@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const description = document.querySelector('.form__task-description').value;
         const priority = document.querySelector('.form__task-priority').value;
         const dueDate = document.querySelector('.form__task-date').value;
-        console.log(`t: ${title}, d: ${dueDate}`)
 
         if (title && dueDate) {
             const newTask = {

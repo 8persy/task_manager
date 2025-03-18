@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "id": "976e",
-      "title": "12312",
-      "description": "1длу дууду",
-      "priority": "low",
-      "dueDate": "2019-10-10",
-      "status": "В процессе"
-    },
-    {
       "id": "4c4c",
       "title": "emkcekmv",
       "description": "kv r fbkыыыыыыыыыыыыыы",
@@ -31,7 +23,16 @@
       "description": "oebfmewobmopembqwvwqvqv\n\ne2vc",
       "priority": "high",
       "dueDate": "2025-12-01",
-      "status": "Завершено",
+      "status": "В процессе",
+      "isEditing": false
+    },
+    {
+      "id": "0462",
+      "title": "задача 1",
+      "description": "привет \n",
+      "priority": "high",
+      "dueDate": "2222-02-20",
+      "status": "В процессе",
       "isEditing": false
     }
   ]
