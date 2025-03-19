@@ -56,6 +56,35 @@
     <div class="loading">Загрузка...</div>
     <div class="task-list"></div>
 </div>
+
+<template id="edit-template">
+    <input type="text" class="task-list__edit-title" placeholder="Название задачи">
+    <textarea class="task-list__edit-description" placeholder="Описание задачи"></textarea>
+    <select class="task-list__edit-priority">
+        <option class="task-list__edit-priority_value_low" value="low">Низкий</option>
+        <option class="task-list__edit-priority_value_medium" value="medium">Средний</option>
+        <option class="task-list__edit-priority_value_high" value="high">Высокий</option>
+    </select>
+    <input class="task-list__edit-date" type="date">
+    <div class="task-list__edit-actions">
+        <button class="task-list__edit-actions_save">Сохранить</button>
+        <button class="task-list__edit-actions_cancel">Отмена</button>
+    </div>
+</template>
+
+<template id="task-template">
+    <h3 class="task-list__task-title"></h3>
+    <p class="task-list__task-description"></p>
+    <p class="task-list__task-priority"></p>
+    <p class="task-list__task-date"></p>
+    <p class="task-list__task-status"></p>
+    <div class="task-list__task-actions">
+        <button class="task-list__task-actions_edit">Редактировать</button>
+        <button class="task-list__task-actions_delete">Удалить</button>
+        <button class="task-list__task-actions_complete"></button>
+    </div>
+</template>
+
 <script src="app.js"></script>
 </body>
 </html>

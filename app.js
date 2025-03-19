@@ -46,35 +46,45 @@ document.addEventListener('DOMContentLoaded', () => {
             taskElement.setAttribute('data-id', task.id);
 
             if (task.isEditing) {
-                // Режим редактирования
-                taskElement.innerHTML = `
-                <input type="text" class="task-list__edit-title" value="${task.title}" placeholder="Название задачи">
-                <textarea class="task-list__edit-description" placeholder="Описание задачи">${task.description}</textarea>
-                <select class="task-list__edit-priority">
-                    <option value="low" ${task.priority === 'low' ? 'selected' : ''}>Низкий</option>
-                    <option value="medium" ${task.priority === 'medium' ? 'selected' : ''}>Средний</option>
-                    <option value="high" ${task.priority === 'high' ? 'selected' : ''}>Высокий</option>
-                </select>
-                <input class="task-list__edit-date" type="date" value="${task.dueDate}">
-                <div class="task-list__edit-actions">
-                    <button class="task-list__edit-actions_save">Сохранить</button>
-                    <button class="task-list__edit-actions_cancel">Отмена</button>
-                </div>
-            `;
+                taskElement.innerHTML = ''
+
+                let editTemplate = document.querySelector('#edit-template').content;
+                let editElement = editTemplate.cloneNode(true);
+
+                editElement.querySelector('.task-list__edit-title').value = task.title;
+                editElement.querySelector('.task-list__edit-description').textContent = task.description;
+
+                if (task.priority === 'low') {
+                    editElement.querySelector('.task-list__edit-priority_value_low').setAttribute('selected', true)
+                } else if (task.priority === 'medium') {
+                    editElement.querySelector('.task-list__edit-priority_value_medium').setAttribute('selected', true)
+                } else if (task.priority === 'high') {
+                    editElement.querySelector('.task-list__edit-priority_value_high').setAttribute('selected', true)
+                }
+
+                editElement.querySelector('.task-list__edit-date').value = task.dueDate;
+
+                taskElement.append(editElement)
+
             } else {
-                // Режим просмотра
-                taskElement.innerHTML = `
-                <h3 class="task-list__task-title">${task.title}</h3>
-                <p class="task-list__task-description">${task.description}</p>
-                <p class="task-list__task-priority">Приоритет: ${task.priority}</p>
-                <p class="task-list__task-date">Срок выполнения: ${task.dueDate}</p>
-                <p class="task-list__task-status">Статус: ${task.status}</p>
-                <div class="task-list__task-actions">
-                    <button class="task-list__task-actions_edit">Редактировать</button>
-                    <button class="task-list__task-actions_delete">Удалить</button>
-                    <button class="task-list__task-actions_complete">${task.status === 'Завершено' ? 'Возобновить' : 'Завершить'}</button>
-                </div>
-            `;
+                taskElement.innerHTML = ''
+
+                let taskTemplate = document.querySelector('#task-template').content;
+                let taskTemplateElement = taskTemplate.cloneNode(true);
+
+                taskTemplateElement.querySelector('.task-list__task-title').textContent = task.title;
+                taskTemplateElement.querySelector('.task-list__task-description').textContent = task.description;
+                taskTemplateElement.querySelector('.task-list__task-priority').textContent = task.priority;
+                taskTemplateElement.querySelector('.task-list__task-date').textContent = task.dueDate;
+                taskTemplateElement.querySelector('.task-list__task-status').textContent = task.status;
+
+                if (task.status === 'Завершено') {
+                    taskTemplateElement.querySelector('.task-list__task-actions_complete').textContent = 'Возобновить'
+                } else {
+                    taskTemplateElement.querySelector('.task-list__task-actions_complete').textContent = 'Завершить'
+                }
+
+                taskElement.append(taskTemplateElement)
             }
 
             // Добавляем обработчики событий
