@@ -125,6 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const priority = taskElement.querySelector('.task-list__edit-priority').value;
         const dueDate = taskElement.querySelector('.task-list__edit-date').value;
 
+        if (!isValidDate(dueDate)) {
+            alert('Срок выполнения должен быть датой в будущем.');
+            return;
+        }
+
         const updatedTask = {
             title,
             description,
@@ -226,6 +231,14 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks(filteredTasks);
     };
 
+    // Функция для проверки даты
+    function isValidDate(dateString) {
+        const inputDate = new Date(dateString);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Убираем время, чтобы сравнивать только даты
+        return inputDate >= today;
+    }
+
     // Функция для добавления задачи
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -234,34 +247,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const priority = document.querySelector('.form__task-priority').value;
         const dueDate = document.querySelector('.form__task-date').value;
 
-        if (title && dueDate) {
-            const newTask = {
-                title,
-                description,
-                priority,
-                dueDate,
-                status: 'В процессе',
-                isEditing: false
-            };
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(newTask)
-                });
-                if (!response.ok) throw new Error('Ошибка при добавлении задачи');
-                await fetchTasks(); // Перезагружаем задачи
-                taskForm.reset();
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Не удалось добавить задачу. Проверьте подключение к серверу.');
-            }
-        } else {
+        if (!title || !dueDate) {
             alert('Пожалуйста, заполните все обязательные поля.');
+            return;
         }
+
+        // Проверка даты
+        if (!isValidDate(dueDate)) {
+            alert('Срок выполнения должен быть датой в будущем.');
+            return;
+        }
+
+        const newTask = {
+            title,
+            description,
+            priority,
+            dueDate,
+            status: 'В процессе',
+            isEditing: false
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newTask)
+            });
+            if (!response.ok) throw new Error('Ошибка при добавлении задачи');
+            await fetchTasks(); // Перезагружаем задачи
+            taskForm.reset();
+        } catch (error) {
+            console.error('Ошибка:', error);
+            alert('Не удалось добавить задачу. Проверьте подключение к серверу.');
+        }
+
     });
 
     // Проверка сервера и загрузка задач
