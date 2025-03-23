@@ -1,15 +1,7 @@
 {
   "tasks": [
     {
-      "id": "4c4c",
-      "title": "emkcekmv",
-      "description": "kv r fbkыыыыыыыыыыыыыы",
-      "priority": "low",
-      "dueDate": "2025-10-10",
-      "status": "Завершено"
-    },
-    {
-      "id": "14fb",
+      "id": "da17",
       "title": "задача ",
       "description": "привет это новая задача ",
       "priority": "high",
@@ -18,7 +10,7 @@
       "isEditing": false
     },
     {
-      "id": "27ce",
+      "id": "f1c5",
       "title": "hi",
       "description": "oebfmewobmopembqwvwqvqv\n\n",
       "priority": "high",
@@ -27,47 +19,11 @@
       "isEditing": false
     },
     {
-      "id": "0462",
-      "title": "задача 1 elkmvevlm",
-      "description": "привет ekmvekvme\n",
+      "id": "11fc",
+      "title": "задача 2",
+      "description": "привет\n",
       "priority": "medium",
-      "dueDate": "2020-02-20",
-      "status": "В процессе",
-      "isEditing": false
-    },
-    {
-      "id": "d7b4",
-      "title": "111",
-      "description": "1111",
-      "priority": "medium",
-      "dueDate": "1010-10-10",
-      "status": "Завершено",
-      "isEditing": false
-    },
-    {
-      "id": "8415",
-      "title": "1g34g3",
-      "description": "12",
-      "priority": "medium",
-      "dueDate": "30123-02-11",
-      "status": "Завершено",
-      "isEditing": false
-    },
-    {
-      "id": "c3f2",
-      "title": "j2ncj12",
-      "description": "kq ",
-      "priority": "low",
-      "dueDate": "2025-10-10",
-      "status": "В процессе",
-      "isEditing": false
-    },
-    {
-      "id": "853b",
-      "title": "wdj ",
-      "description": "",
-      "priority": "low",
-      "dueDate": "2025-11-30",
+      "dueDate": "2025-12-20",
       "status": "В процессе",
       "isEditing": false
     }
