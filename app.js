@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ключ для Local Storage
     const localStorageKey = 'tasks';
 
-    let editingTaskId = null; // ID задачи, которая сейчас редактируется
+    let editingTaskId = null;
 
     // Функция для генерации уникального ID
     function generateUniqueId() {
@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const storedTasks = localStorage.getItem(localStorageKey);
         if (storedTasks) {
             tasks = JSON.parse(storedTasks);
-            // Убедимся, что у каждой задачи есть уникальный ID
+
             tasks.forEach(task => {
                 if (!task.id) {
-                    task.id = generateUniqueId(); // Генерируем ID, если его нет
+                    task.id = generateUniqueId()
                 }
             });
             renderTasks(tasks);
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return true;
         } catch (error) {
             console.error('Ошибка при подключении к серверу:', error);
-            loadTasksFromLocalStorage(); // Загружаем задачи из Local Storage
+            loadTasksFromLocalStorage();
             return false;
         }
     }
@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Ошибка при загрузке задач');
             tasks = await response.json();
             renderTasks(tasks);
-            saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
+            saveTasksToLocalStorage();
         } catch (error) {
             console.error('Ошибка:', error);
-            loadTasksFromLocalStorage(); // Загружаем задачи из Local Storage
+            loadTasksFromLocalStorage();
         } finally {
             document.querySelector('.loading').style.display = 'none';
         }
@@ -82,13 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return (completedTasks / totalTasks) * 100;
     }
 
-// Функция для обновления Progress Bar
+    // Функция для обновления Progress Bar
     function updateProgress() {
         const progress = calculateProgress(tasks);
         const progressFill = document.querySelector('.progress__fill');
         const progressText = document.querySelector('.progress__text');
 
-        // Обновляем ширину полоски и текст
         progressFill.style.width = `${progress}%`;
         progressText.textContent = `${Math.round(progress)}%`;
     }
@@ -100,15 +99,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const taskElement = document.createElement('div');
             taskElement.classList.add('task-list__task');
 
-            // Проверяем, редактируется ли эта задача
             if (task.id === editingTaskId) {
-                taskElement.classList.add('editing'); // Добавляем класс для режима редактирования
+                taskElement.classList.add('editing');
             }
 
             taskElement.setAttribute('data-id', task.id);
 
             if (task.id === editingTaskId) {
-                // Режим редактирования
                 taskElement.innerHTML = '';
 
                 let editTemplate = document.querySelector('#edit-template').content;
@@ -129,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 taskElement.append(editElement);
             } else {
-                // Режим просмотра
                 taskElement.innerHTML = '';
 
                 let taskTemplate = document.querySelector('#task-template').content;
@@ -150,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 taskElement.append(taskTemplateElement);
             }
 
-            // Добавляем обработчики событий
             if (task.id === editingTaskId) {
                 const saveButton = taskElement.querySelector('.task-list__edit-actions_save');
                 const cancelButton = taskElement.querySelector('.task-list__edit-actions_cancel');
@@ -175,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для начала редактирования задачи
     function startEdit(taskId) {
-        editingTaskId = taskId; // Устанавливаем ID редактируемой задачи
-        renderTasks(tasks); // Перерисовываем задачи
+        editingTaskId = taskId; //
+        renderTasks(tasks);
     }
 
     // Функция для сохранения задачи
@@ -205,18 +200,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) throw new Error('Ошибка при сохранении задачи');
 
-            editingTaskId = null; // Сбрасываем ID редактируемой задачи
-            fetchTasks(); // Перезагружаем задачи
+            editingTaskId = null;
+            await fetchTasks();
         } catch (error) {
             console.error('Ошибка:', error);
             editingTaskId = null;
 
-            // Сохраняем изменения в Local Storage, если сервер недоступен
             const taskIndex = tasks.findIndex(task => task.id === taskId);
             if (taskIndex !== -1) {
                 tasks[taskIndex] = {...tasks[taskIndex], ...updatedTask};
-                saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
-                renderTasks(tasks); // Перерисовываем задачи
+                saveTasksToLocalStorage();
+                renderTasks(tasks);
             }
 
             alert('Сервер недоступен. Изменения сохранены локально.');
@@ -225,8 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для отмены редактирования
     function cancelEdit() {
-        editingTaskId = null; // Сбрасываем ID редактируемой задачи
-        renderTasks(tasks); // Перерисовываем задачи
+        editingTaskId = null;
+        renderTasks(tasks);
     }
 
     // Функция для удаления задачи
@@ -236,14 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'DELETE'
             });
             if (!response.ok) throw new Error('Ошибка при удалении задачи');
-            await fetchTasks(); // Перезагружаем задачи
+            await fetchTasks();
         } catch (error) {
             console.error('Ошибка:', error);
 
-            // Удаляем задачу из Local Storage, если сервер недоступен
             tasks = tasks.filter(task => task.id !== taskId);
-            saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
-            renderTasks(tasks); // Перерисовываем задачи
+            saveTasksToLocalStorage();
+            renderTasks(tasks);
 
             alert('Сервер недоступен. Задача удалена локально.');
         }
@@ -266,18 +259,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Ошибка при изменении статуса задачи');
 
-            // Обновляем задачу в локальном массиве
             task.status = newStatus;
 
-            // Перерисовываем задачи
             renderTasks(tasks);
         } catch (error) {
             console.error('Ошибка:', error);
 
-            // Изменяем статус задачи в Local Storage, если сервер недоступен
             task.status = newStatus;
-            saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
-            renderTasks(tasks); // Перерисовываем задачи
+            saveTasksToLocalStorage();
+            renderTasks(tasks);
 
             alert('Сервер недоступен. Статус задачи изменён локально.');
         }
@@ -310,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function isValidDate(dateString) {
         const inputDate = new Date(dateString);
         const today = new Date();
-        today.setHours(0, 0, 0, 0); // Убираем время, чтобы сравнивать только даты
+        today.setHours(0, 0, 0, 0);
         return inputDate >= today;
     }
 
@@ -360,16 +350,15 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 const createdTask = await response.json();
                 tasks.push(createdTask);
-                saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
+                saveTasksToLocalStorage();
                 renderTasks(tasks);
                 taskForm.reset();
             }
         } catch (error) {
             console.error('Ошибка:', error);
-            // Генерируем уникальный ID для задачи, если сервер недоступен
             newTask.id = generateUniqueId();
             tasks.push(newTask);
-            saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
+            saveTasksToLocalStorage();
             renderTasks(tasks);
             alert('Сервер недоступен. Задача сохранена локально.');
         }
@@ -388,11 +377,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Синхронизируем каждую задачу из Local Storage
             for (const localTask of localTasks) {
-                // Проверяем, существует ли задача на сервере
                 const existingTask = serverTasks.find(task => task.title === localTask.title && task.dueDate === localTask.dueDate);
 
                 if (existingTask) {
-                    // Если задача существует, обновляем её
                     const response = await fetch(`${apiUrl}/${existingTask.id}`, {
                         method: 'PUT',
                         headers: {
@@ -405,7 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         throw new Error('Ошибка при обновлении задачи');
                     }
                 } else {
-                    // Если задача не существует, добавляем её
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: {
@@ -420,8 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            localStorage.removeItem(localStorageKey); // Очищаем Local Storage после успешной синхронизации
-            fetchTasks(); // Загружаем задачи с сервера
+            localStorage.removeItem(localStorageKey);
+            fetchTasks();
         } catch (error) {
             console.error('Ошибка при синхронизации задач:', error);
         }
@@ -430,8 +416,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Проверка сервера и загрузка задач
     checkServer().then(isServerAvailable => {
         if (isServerAvailable) {
-            syncTasksWithServer(); // Синхронизируем локальные данные с сервером
-            fetchTasks(); // Загружаем задачи с сервера
+            syncTasksWithServer();
+            fetchTasks();
         }
     });
 });
