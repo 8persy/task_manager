@@ -33,6 +33,11 @@
 @import "task-list/__task-description/task-list__task-description.css";
 @import "task-list/__task-date/task-list__task-date.css";
 
+@import "progress/progress.css";
+@import "progress/__bar/progress__bar.css";
+@import "progress/__text/progress__text.css";
+@import "progress/__fill/progress__fill.css";
+
 
 body {
     font-family: Arial, sans-serif;
@@ -42,8 +47,8 @@ body {
 }
 
 .container {
-    max-width: 90%;
-    margin: 50px auto;
+    max-width: 95%;
+    margin: 15px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -52,13 +57,10 @@ body {
     flex-wrap: wrap;
 }
 
-.task.fade-out {
-    opacity: 0;
-    transform: translateX(-100%);
-}
 
-/* Стили для режима редактирования */
-.task.editing {
-    /*background-color: #fff3cd;*/
-    /*border-color: #ffeeba;*/
-}
+
+
+
+
+
+

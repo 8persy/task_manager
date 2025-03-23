@@ -73,6 +73,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Функция для расчёта прогресса выполнения задач
+    function calculateProgress(tasks) {
+        const totalTasks = tasks.length;
+        if (totalTasks === 0) return 0; // Если задач нет, прогресс 0%
+
+        const completedTasks = tasks.filter(task => task.status === 'Завершено').length;
+        return (completedTasks / totalTasks) * 100;
+    }
+
+// Функция для обновления Progress Bar
+    function updateProgress() {
+        const progress = calculateProgress(tasks);
+        const progressFill = document.querySelector('.progress__fill');
+        const progressText = document.querySelector('.progress__text');
+
+        // Обновляем ширину полоски и текст
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = `${Math.round(progress)}%`;
+    }
+
     // Функция для отображения задач
     function renderTasks(tasks) {
         taskList.innerHTML = '';
@@ -150,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             taskList.prepend(taskElement);
         });
         document.querySelector('.loading').style.display = 'none';
+        updateProgress()
     }
 
     // Функция для начала редактирования задачи
@@ -193,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Сохраняем изменения в Local Storage, если сервер недоступен
             const taskIndex = tasks.findIndex(task => task.id === taskId);
             if (taskIndex !== -1) {
-                tasks[taskIndex] = { ...tasks[taskIndex], ...updatedTask };
+                tasks[taskIndex] = {...tasks[taskIndex], ...updatedTask};
                 saveTasksToLocalStorage(); // Сохраняем задачи в Local Storage
                 renderTasks(tasks); // Перерисовываем задачи
             }
@@ -241,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             });
             if (!response.ok) throw new Error('Ошибка при изменении статуса задачи');
 

@@ -10,20 +10,20 @@
       "isEditing": false
     },
     {
-      "id": "f1c5",
-      "title": "hi",
-      "description": "oebfmewobmopembqwvwqvqv\n\n",
-      "priority": "high",
-      "dueDate": "2025-12-01",
+      "id": "11fc",
+      "title": "задача 2",
+      "description": "привет\nпривет\n",
+      "priority": "medium",
+      "dueDate": "2025-12-20",
       "status": "В процессе",
       "isEditing": false
     },
     {
-      "id": "11fc",
-      "title": "задача 2",
-      "description": "привет\n",
-      "priority": "medium",
-      "dueDate": "2025-12-20",
+      "id": "09ee",
+      "title": "geng",
+      "description": "",
+      "priority": "low",
+      "dueDate": "2025-10-10",
       "status": "В процессе",
       "isEditing": false
     }
